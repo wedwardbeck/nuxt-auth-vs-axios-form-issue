@@ -6,18 +6,16 @@
         <nuxt />
       </div>
     </section>
-    <mainFooter />
+    
   </div>
 </template>
 
 <script>
 import TheNavbar from "@/components/Navigation/TheNavbar"
-import mainFooter from "@/components/UI/mainFooter"
 
 export default {
   components: {
-    TheNavbar,
-    mainFooter
+    TheNavbar
   },
   data() {
     return {
