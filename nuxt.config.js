@@ -42,7 +42,6 @@ export default {
     plugins: [
       '~/plugins/fontawesome.js',
         '~/plugins/buefy.js',
-        // '~/plugins/logrocket.js',
         '~/plugins/vuelidate.js',
         '~/plugins/axios.js',
         '~/plugins/date-fns.js'
