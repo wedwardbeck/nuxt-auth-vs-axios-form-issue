@@ -65,45 +65,35 @@
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
 export default {
   data() {
     return {
-      username: '',
-      password: '',
+      username: "",
+      password: "",
       error: null
     }
   },
-  middleware: 'guest',
+  middleware: "guest",
   methods: {
-
     async login() {
       try {
         const config = {
           headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+            "Content-Type": "application/x-www-form-urlencoded"
           }
         }
         const form = new FormData()
-        form.append('username', this.username)
-        form.append('password', this.password)
-        await this.$axios.$post('login/access-token', form, config)
-        // const params = new URLSearchParams()
-        // params.append('username', this.username)
-        // params.append('password', this.password)
-        // const response = await this.$store.dispatch('login', form)
-        // const response = await this.$auth.loginWith('local', {
-        //   data: {
-        //     username: this.username,
-        //     password: this.password
-        //   }
-        // })
-        // if (this.$store.state.user) {
-        //   this.$toast.success('Welcome back!')
-        //   this.$router.push(decodeURIComponent(this.$route.query.next || '/'))
-        // }
-        // console.log(response)
-        this.$router.push('/')
+        form.append("username", this.username)
+        form.append("password", this.password)
+        // await this.$axios.$post("login/access-token", form, config)
+        await this.$auth.loginWith('local', {
+          data: {
+            username: this.username,
+            password: this.password
+          }
+        })
+        this.$router.push("/")
       } catch (err) {
         // this.error = err.response.data.message
         console.log(err)

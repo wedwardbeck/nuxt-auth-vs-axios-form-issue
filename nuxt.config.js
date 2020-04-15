@@ -40,7 +40,6 @@ export default {
      ** Plugins to load before mounting the App
      */
     plugins: [
-      '~/plugins/fontawesome.js',
         '~/plugins/buefy.js',
         '~/plugins/vuelidate.js',
         '~/plugins/axios.js',
@@ -57,7 +56,7 @@ export default {
      ** Nuxt.js modules
      */
     modules: [
-        
+
         // Doc: https://axios.nuxtjs.org/usage
         '@nuxtjs/axios',
         '@nuxtjs/auth'
@@ -71,7 +70,7 @@ export default {
     },
     auth: {
           token: {
-            prefix: 'Bearer', //  Default prefix used in building a key for token storage across all storage providers.
+            prefix: 'access_token', //  Default prefix used in building a key for token storage across all storage providers.
           },
         cookie: {
             options: {
@@ -92,7 +91,7 @@ export default {
                 user: { url: '/auth/users/me/', method: 'get', propertyName: false },
               },
               // tokenRequired: true,
-              tokenType: 'Token',
+              tokenType: 'Bearer',
               tokenName: 'Authorization'
             }
           }
