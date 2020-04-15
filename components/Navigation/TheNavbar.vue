@@ -1,0 +1,108 @@
+<template>
+  <b-navbar type="is-dark is-fixed-top">
+    <template slot="brand">
+      <b-navbar-item
+        tag="nuxt-link"
+        :to="{ path: '/' }"
+      >
+        <img src="~/assets/buefy.png">
+      </b-navbar-item>
+    </template>
+    <template slot="start">
+      <b-navbar-dropdown
+        label="Menu"
+        hoverable
+      >
+        <b-navbar-item
+          tag="nuxt-link"
+          :to="{ name: '/' }"
+        >
+          Search
+        </b-navbar-item>
+        <b-navbar-item
+          tag="nuxt-link"
+          :to="{ name: 'client-inbox' }"
+        >
+          Inbox
+        </b-navbar-item>
+        <b-navbar-item
+          tag="nuxt-link"
+          :to="{ name: '/' }"
+        >
+          Sent Items
+        </b-navbar-item>
+        <b-navbar-item
+          tag="nuxt-link"
+          :to="{ name: '/' }"
+        >
+          Reporting
+        </b-navbar-item>
+      </b-navbar-dropdown>
+    </template>
+    <template slot="end">
+      <b-navbar-dropdown
+        v-if="this.$store.state.auth.loggedIn"
+        hoverable
+        :label="this.$store.state.auth.user.first_name"
+      >
+        <b-navbar-item
+          tag="nuxt-link"
+          :to="{ name: 'profile' }"
+        >
+          My Profile
+        </b-navbar-item>
+        <b-navbar-item @click="$auth.logout()">
+          Logout
+        </b-navbar-item>
+      </b-navbar-dropdown>
+    </template>
+    <template
+      v-if="!this.$store.state.auth.loggedIn"
+      slot="end"
+    >
+      <b-navbar-item tag="div">
+        <div class="buttons">
+          <b-button
+            tag="nuxt-link"
+            :to="{ name: 'auth-register' }"
+            type="is-link"
+            class="button is-primary is-inverted"
+          >
+            Sign Up
+          </b-button>
+          <b-button
+            tag="nuxt-link"
+            :to="{ name: 'auth-login' }"
+            type="is-link"
+            class="button is-light is-primary"
+          >
+            Log in
+          </b-button>
+        </div>
+      </b-navbar-item>
+    </template>
+  </b-navbar>
+</template>
+
+<script>
+import { mapGetters } from "vuex"
+
+export default {
+  props: {},
+  computed: {
+    ...mapGetters(["isAuthenticated", "loggedInUser"])
+  },
+  methods: {
+    async logout() {
+      try {
+        await this.$store.dispatch("logout")
+      } catch (e) {
+        this.formError = e.message
+      }
+    }
+  }
+}
+</script>
+
+<style scoped>
+</style>
